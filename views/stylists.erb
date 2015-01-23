@@ -7,5 +7,21 @@
     <% end %>
   </ul>
   <% else %>
-  <p>There are no stylists yet. Maybe try putting an ad in the paper.</p>
+  <p>There are no stylists yet. Maybe try putting an ad in the paper. Or of course you could add one below.</p>
 <% end %>
+
+<div class = "col-md-6">
+  <form action="/add_stylist" method = "post">
+    <div class="form-group">
+      <label for="stylist_name">Stylist Name</label>
+      <input id="stylist_name" name="stylist_name" class="form-control" type="text">
+    </div>
+
+    <button type="submit" class="btn">Add</button>
+  </form>
+  <br>
+  <form action = "/clear" method = "post">
+    <button type = "submit" class = "btn-danger">Clear all your clients!</button>
+  </form>
+
+</div>

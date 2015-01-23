@@ -41,4 +41,14 @@ class Stylist
     DB.exec("DELETE FROM stylists *")
   end
 
+  define_method(:get_client_ids) do
+    assigned_client_ids = []
+    returned_clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{@id};")
+    returned_clients.each() do |client|
+      id = client.fetch("id").to_i()
+      assigned_client_ids.push(id)
+    end
+    assigned_client_ids
+  end
+
 end

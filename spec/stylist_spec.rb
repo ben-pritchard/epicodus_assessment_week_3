@@ -64,4 +64,15 @@ describe(Stylist) do
     end
   end
 
+  describe("#get_client_ids") do
+    it("returns all of the clients assigned to this stylist") do
+      bobbi = Stylist.new({:id => 1, :name => "Bobbi"})
+      bobbi.save()
+      baldy = Client.new({:id => 1, :name => "Baldy"})
+      baldy.save()
+      baldy.assign(bobbi)
+      expect(bobbi.get_client_ids()).to(eq([baldy.id()]))
+    end
+  end
+
 end
