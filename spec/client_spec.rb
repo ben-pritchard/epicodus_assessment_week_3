@@ -62,4 +62,23 @@ describe(Client) do
       expect(Client.find(baldy.id())).to(eq(baldy))
     end
   end
+
+  describe(".clear") do
+    it("clears the list of clients") do
+      baldy = Client.new({:id => 1, :name => "Baldy"})
+      baldy.save()
+      Client.clear()
+      expect(Client.all()).to(eq([]))
+    end
+  end
+
+  describe(".all") do
+    it("returns all of the clients in the database - alphabetized") do
+      hairy = Client.new({:id => 2, :name => "Hairy"})
+      hairy.save()
+      baldy = Client.new({:id => 1, :name => "Baldy"})
+      baldy.save()
+      expect(Client.all()).to(eq([baldy, hairy]))
+    end
+  end
 end

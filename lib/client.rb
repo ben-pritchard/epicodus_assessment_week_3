@@ -10,7 +10,7 @@ class Client
 
   define_singleton_method(:all) do
     all_clients = []
-    db_clients = DB.exec("SELECT * FROM clients")
+    db_clients = DB.exec("SELECT * FROM clients ORDER BY name")
     db_clients.each() do |client|
       id = client.fetch("id").to_i()
       name = client.fetch("name")
@@ -42,6 +42,10 @@ class Client
       end
     end
     found_client
+  end
+
+  define_singleton_method(:clear) do
+    DB.exec("DELETE FROM clients *")
   end
 
 end

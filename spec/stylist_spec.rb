@@ -44,4 +44,24 @@ describe(Stylist) do
       expect(Stylist.find(bobbi.id())).to(eq(bobbi))
     end
   end
+
+  describe(".clear") do
+    it("clears the list of stylists") do
+      bobbi = Stylist.new({:id => 1, :name => "Bobbi"})
+      bobbi.save()
+      Stylist.clear()
+      expect(Stylist.all()).to(eq([]))
+    end
+  end
+
+  describe(".all") do
+    it("returns all of the stylists in the database - alphabetized") do
+      jo = Stylist.new({:id => 2, :name => "Jo"})
+      jo.save()
+      bobbi = Stylist.new({:id => 1, :name => "Bobbi"})
+      bobbi.save()
+      expect(Stylist.all()).to(eq([bobbi, jo]))
+    end
+  end
+
 end

@@ -9,7 +9,7 @@ class Stylist
 
   define_singleton_method(:all) do
     all_stylists = []
-    db_stylists = DB.exec("SELECT * FROM stylists")
+    db_stylists = DB.exec("SELECT * FROM stylists ORDER BY name;")
     db_stylists.each() do |stylist|
       id = stylist.fetch("id").to_i()
       name = stylist.fetch("name")
@@ -37,5 +37,8 @@ class Stylist
     found_stylist
   end
 
+  define_singleton_method(:clear) do
+    DB.exec("DELETE FROM stylists *")
+  end
 
 end

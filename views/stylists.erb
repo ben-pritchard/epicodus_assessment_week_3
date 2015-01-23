@@ -1,0 +1,11 @@
+<h1>Here are all your stylists:</h1>
+
+<% if @stylists.any?() %>
+  <ul>
+    <% @stylists.each() do |stylist| %>
+    <li><a href = "/stylist/<%= stylist.id() %>"><%= stylist.name() %></a></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>There are no stylists yet. Maybe try putting an ad in the paper.</p>
+<% end %>
