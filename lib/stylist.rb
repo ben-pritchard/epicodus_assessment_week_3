@@ -27,5 +27,15 @@ class Stylist
     @id = returned_id.first().fetch("id").to_i()
   end
 
+  define_singleton_method(:find) do |stylist_id|
+    found_stylist = nil
+    Stylist.all().each() do |stylist|
+      if stylist_id == stylist.id()
+        found_stylist = stylist
+      end
+    end
+    found_stylist
+  end
+
 
 end
