@@ -1,0 +1,23 @@
+<h1>The low-down on <%= @client.name() %></h1>
+
+<h3>Here are <%= @client.name() %>'s stylists:</h3>
+
+<% if @assigned_stylist_ids.any?() %>
+  <ul>
+    <% @assigned_stylist_ids.each() do |stylist_id| %>
+    <li><%= Stylist.find(stylist_id).name() %></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>Aww, <%= @client.name() %> doesn't have any stylists! You should probably throw them a bone.</p>
+<% end %>
+
+<form action="/add_stylist_to_client" method = "post">
+  <div class="form-group">
+    <input id="client_id" name="client_id" type="hidden" value = "<%= @client.id() %>">
+    <label for="stylist_name">Stylist Name</label>
+    <input id="stylist_name" name="stylist_name" class="form-control" type="text">
+  </div>
+
+  <button type="submit" class="btn">Add</button>
+</form>

@@ -42,7 +42,43 @@ post("/add_client_to_stylist") do
   erb(:stylist_info)
 end
 
-post("/clear") do
+post("/clear_stylists") do
   Stylist.clear()
   redirect("/stylists")
+end
+
+
+get("/clients") do
+  @clients = Client.all()
+  erb(:clients)
+end
+
+get("/client/:client_id") do
+  client_id = params.fetch("client_id").to_i()
+  @client = Client.find(client_id)
+  @assigned_stylist_ids = @client.get_stylist_id()
+  erb(:client_info)
+end
+
+post("/add_client") do
+  client_name = params.fetch("client_name")
+  new_client = Client.new({:name => client_name})
+  new_client.save()
+  redirect("/clients")
+end
+
+post("/add_stylist_to_client") do
+  stylist_name = params.fetch("stylist_name")
+  @stylist = Stylist.new({:name => stylist_name})
+  @stylist.save()
+  @client_id = params.fetch("client_id").to_i()
+  @client = Client.find(@client_id)
+  @stylist.assign(@client)
+  @assigned_stylist_ids = @client.get_stylist_id()
+  erb(:client_info)
+end
+
+post("/clear_clients") do
+  Client.clear()
+  redirect("/clients")
 end

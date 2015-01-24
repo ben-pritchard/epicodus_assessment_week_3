@@ -48,4 +48,18 @@ class Client
     DB.exec("DELETE FROM clients *")
   end
 
+  define_method(:get_stylist_id) do
+    assigned_stylist_id = []
+    if @stylist_id == nil
+      assigned_stylist_id = [nil]
+    else
+      returned_stylist = DB.exec("SELECT * FROM stylists WHERE id = #{@stylist_id};")
+      returned_stylist.each() do |stylist|
+        id = stylist.fetch("id").to_i()
+        assigned_stylist_id.push(id)
+      end
+    end
+    assigned_stylist_id
+  end
+
 end

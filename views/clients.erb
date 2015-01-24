@@ -1,0 +1,61 @@
+<h1>Here are all your clients:</h1>
+
+<table class="table table-striped table-hover ">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Client</th>
+    <th>Assigned Stylist</th>
+  </tr>
+</thead>
+
+<% if @clients.any?() %>
+
+<tbody>
+  <% @clients.each_with_index() do |client, index| %>
+    <tr class = "info">
+    
+      <% count = index + 1 %>
+      <td><%= count %></td>
+      <td><a href = "/client/<%= client.id() %>"><%= client.name() %></a></td>
+      <% stylist_id = client.get_stylist_id.first() %>
+      <% if stylist_id == nil %>
+        <td>There is no stylist assigned to this client.</td>
+      <% else %>
+        <% stylist = Stylist.find(stylist_id) %>
+        <td><a href = "/stylist/<%= stylist.id() %>"><%= stylist.name() %></a></td>
+      <% end %>
+
+    </tr>
+  <% end %>
+</tbody>
+</table>
+
+<% else %>
+
+  <tbody>
+    <tr>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>N/A</td>
+    </tr>
+  </tbody>
+  </table>
+
+<% end %>
+
+<div class = "col-md-6">
+  <form action="/add_client" method = "post">
+    <div class="form-group">
+      <label for="client_name">Client Name</label>
+      <input id="client_name" name="client_name" class="form-control" type="text">
+    </div>
+
+    <button type="submit" class="btn">Add</button>
+  </form>
+  <br>
+  <form action = "/clear_clients" method = "post">
+    <button type = "submit" class = "btn-danger">Clear all your clients!</button>
+  </form>
+
+</div>
