@@ -14,7 +14,7 @@
 <tbody>
   <% @clients.each_with_index() do |client, index| %>
     <tr class = "info">
-    
+
       <% count = index + 1 %>
       <td><%= count %></td>
       <td><a href = "/client/<%= client.id() %>"><%= client.name() %></a></td>
@@ -57,5 +57,8 @@
   <form action = "/clear_clients" method = "post">
     <button type = "submit" class = "btn-danger">Clear all your clients!</button>
   </form>
-
+  <br>
+  <form action="/">
+    <button type="submit" class="btn">Home</button>
+  </form>
 </div>

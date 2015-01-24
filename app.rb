@@ -56,7 +56,7 @@ end
 get("/client/:client_id") do
   client_id = params.fetch("client_id").to_i()
   @client = Client.find(client_id)
-  @assigned_stylist_ids = @client.get_stylist_id()
+  @assigned_stylist_id = @client.get_stylist_id()
   erb(:client_info)
 end
 
@@ -74,7 +74,7 @@ post("/add_stylist_to_client") do
   @client_id = params.fetch("client_id").to_i()
   @client = Client.find(@client_id)
   @stylist.assign(@client)
-  @assigned_stylist_ids = @client.get_stylist_id()
+  @assigned_stylist_id = @client.get_stylist_id()
   erb(:client_info)
 end
 
